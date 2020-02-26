@@ -10,11 +10,12 @@ import (
 	"time"
 )
 
+// A Command is executed on each check and consists of a program and it's command line arguments.
 type Command struct {
-	CommandName string `json:"command_name,omitempty"`
-	CommandLine string `json:"command_line,omitempty"`
-	Register    bool   `json:"register,omitempty"`
-	FileID      string `json:"file_id,omitempty"`
+	CommandName string `json:"command_name"` //Name / description for the command. Good practise is to use check_ followed by a descriptive name for the test, for example check_http for a simple HTTP check. This, like ALL variables ending in '_name', must be a unique name.
+	CommandLine string `json:"command_line"` // This is the shell command that will be executed. Naemon macros (shortcuts) like $USER$ can be used.
+	Register    bool   `json:"register,omitempty"` //Tells op5 Monitor in which file this object should be stored. This can come in handy if you are used to edit the configuration directly in the text files. For security reasons, file creation through the web-interface is not supported.
+	FileID      string `json:"file_id,omitempty"` //If this is set to on/true, the object is considered to be part of the configuration. Otherwise it used as a template.
 }
 
 func GetCommand(command string, server string, username string, password string, allowInsecure bool) (Command, error) {
