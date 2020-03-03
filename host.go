@@ -289,7 +289,6 @@ func UpdateHost(data Host, server string, username string, password string, allo
 	return returnedBody, err
 }
 
-
 func ReplaceHost(data Host, server string, username string, password string, allowInsecure bool) (Host, error) {
 
 	var returnedBody Host
@@ -392,7 +391,6 @@ func DeleteHost(host string, server string, username string, password string, al
 		err = json.Unmarshal(e, &returnedError)
 	}
 
-
 	defer func() {
 		err := response.Body.Close()
 		if err != nil {
@@ -400,9 +398,6 @@ func DeleteHost(host string, server string, username string, password string, al
 		}
 	}()
 	body, _ := ioutil.ReadAll(response.Body)
-
-
-
 
 	return string(body), err
 }
