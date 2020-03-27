@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func (o Payload) Get(server Server, m string) ([]byte, string, int, error) {
+func (o Payload) Get(server Server) ([]byte, string, int, error) {
 	var returnedError APIResponseError
 
 	customTransport := http.DefaultTransport.(*http.Transport).Clone()
