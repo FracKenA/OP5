@@ -110,7 +110,7 @@ type Host struct {
 	NotificationsEnabled       bool          `json:"notifications_enabled,omitempty"`
 	Alias                      string        `json:"alias,omitempty"`
 	DisplayName                string        `json:"display_name,omitempty"`
-	HostGroups                 []interface{} `json:"hostgroups,omitempty"`
+	HostGroups                 []string `json:"hostgroups,omitempty"`
 	Parents                    []interface{} `json:"parents,omitempty"`
 	Children                   []interface{} `json:"children,omitempty"`
 	CheckCommandArgs           string        `json:"check_command_args,omitempty"`

@@ -61,7 +61,8 @@ func (o Payload) Add(server Server) ([]byte, string, int, error) {
 
 	customTransport := http.DefaultTransport.(*http.Transport).Clone()
 	body := bytes.NewReader(o.Body)
-	req, err := http.NewRequest("POST", "https://"+server.Host+"/api/config/"+o.Endpoint, body)
+	fmt.Println(server.Host)
+	req, err := http.NewRequest("POST", "https://"+ server.Host +"/api/config/"+o.Endpoint, body)
 	if err != nil {
 		fmt.Printf("Error%s\n", err)
 
@@ -84,6 +85,13 @@ func (o Payload) Add(server Server) ([]byte, string, int, error) {
 		fmt.Printf("Error %s\n", err)
 	}
 
+	defer func() {
+		err := response.Body.Close()
+		if err != nil {
+			fmt.Printf("Error %s\n", err)
+		}
+	}()
+
 	e, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
@@ -100,7 +108,8 @@ func (o Payload) Update(server Server) ([]byte, string, int, error) {
 
 	customTransport := http.DefaultTransport.(*http.Transport).Clone()
 	body := bytes.NewReader(o.Body)
-	req, err := http.NewRequest("PATCH", "https://"+server.Host+"/api/config/"+o.Endpoint, body)
+	ep := fmt.Sprintf("https://%s/api/config/%s/%s", server.Host, o.Endpoint, o.Target)
+	req, err := http.NewRequest("PATCH", ep, body)
 	if err != nil {
 		fmt.Printf("Error%s\n", err)
 
@@ -146,7 +155,8 @@ func (o Payload) Replace(server Server) ([]byte, string, int, error) {
 
 	customTransport := http.DefaultTransport.(*http.Transport).Clone()
 	body := bytes.NewReader(o.Body)
-	req, err := http.NewRequest("PUT", "https://"+server.Host+"/api/config/"+o.Endpoint, body)
+	ep := fmt.Sprintf("https://%s/api/config/%s/%s", server.Host, o.Endpoint, o.Target)
+	req, err := http.NewRequest("PUT", ep, body)
 	if err != nil {
 		fmt.Printf("Error%s\n", err)
 
@@ -184,6 +194,7 @@ func (o Payload) Replace(server Server) ([]byte, string, int, error) {
 	status := response.Status
 	code := response.StatusCode
 	err = json.Unmarshal(e, &returnedError)
+
 	return e, status, code, err
 }
 
@@ -192,7 +203,8 @@ func (o Payload) Delete(server Server) ([]byte, string, int, error) {
 
 	customTransport := http.DefaultTransport.(*http.Transport).Clone()
 	body := bytes.NewReader(o.Body)
-	req, err := http.NewRequest("DELETE", "https://"+server.Host+"/api/config/"+o.Target, body)
+	ep := fmt.Sprintf("https://%s/api/config/%s/%s", server.Host, o.Endpoint, o.Target)
+	req, err := http.NewRequest("PUT", ep, body)
 	if err != nil {
 		fmt.Printf("Error%s\n", err)
 

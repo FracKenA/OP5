@@ -10,7 +10,7 @@ func (p Command) Command() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"Command", j, p.CommandName}
+	o := Payload{"command", j, p.CommandName}
 	return o
 }
 
@@ -19,7 +19,7 @@ func (p Contact) Contact() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"Contact", j, p.ContactName}
+	o := Payload{"contact", j, p.ContactName}
 	return o
 }
 
@@ -28,7 +28,7 @@ func (p ContactTemplate) ContactTemplate() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"ContactTemplate", j, p.Name}
+	o := Payload{"contacttemplate", j, p.Name}
 	return o
 }
 
@@ -37,7 +37,7 @@ func (p ContactGroup) ContactGroup() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"ContactGroup", j, p.ContactGroupName}
+	o := Payload{"contactgroup", j, p.ContactGroupName}
 	return o
 }
 
@@ -46,6 +46,7 @@ func (p Host) Host() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
+
 	var emap map[string]interface{}
 	if err = json.Unmarshal(j, &emap); err != nil {
 		fmt.Printf("Error %s\n", err)
@@ -59,7 +60,8 @@ func (p Host) Host() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"Host", j, p.HostName}
+	o := Payload{"host", j, p.HostName}
+
 	return o
 }
 
@@ -81,7 +83,7 @@ func (p HostTemplate) HostTemplate() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"HostTemplate", j, p.Name}
+	o := Payload{"hosttemplate", j, p.Name}
 	return o
 }
 
@@ -90,7 +92,7 @@ func (p HostGroup) HostGroup() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"HostGroup", j, p.HostGroupName}
+	o := Payload{"hostgroup", j, p.HostGroupName}
 	return o
 }
 
@@ -112,7 +114,7 @@ func (p Service) Service() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"Service", j, p.ServiceDescription}
+	o := Payload{"service", j, p.ServiceDescription}
 	return o
 }
 
@@ -134,7 +136,7 @@ func (p ServiceTemplate) ServiceTemplate() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"ServiceTemplate", j, p.Name}
+	o := Payload{"servicetemplate", j, p.Name}
 	return o
 }
 
@@ -152,7 +154,7 @@ func (p TimePeriod) TimePeriod() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"TimePeriod", j, p.TimePeriodName}
+	o := Payload{"timeperiod", j, p.TimePeriodName}
 	return o
 }
 
@@ -161,7 +163,7 @@ func (p User) User() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"User", j, p.Username}
+	o := Payload{"user", j, p.Username}
 	return o
 }
 
@@ -170,6 +172,6 @@ func (p UserGroup) UserGroup() Payload {
 	if err != nil {
 		fmt.Printf("Error %s\n", err)
 	}
-	o := Payload{"UserGroup", j, p.Name}
+	o := Payload{"usergroup", j, p.Name}
 	return o
 }
