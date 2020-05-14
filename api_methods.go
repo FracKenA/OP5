@@ -15,7 +15,7 @@ func (o Payload) Get(server Server) ([]byte, string, int, error) {
 
 	customTransport := http.DefaultTransport.(*http.Transport).Clone()
 	body := bytes.NewReader(o.Body)
-	req, err := http.NewRequest("GET", "https://"+server.Host+"/api/config/"+o.Target, body)
+	req, err := http.NewRequest("GET", "https://"+server.Host+"/api/config/"+o.Endpoint+"/"+o.Target, body)
 	if err != nil {
 		fmt.Printf("Error%s\n", err)
 
